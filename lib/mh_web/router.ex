@@ -1,4 +1,5 @@
 defmodule MhWeb.Router do
+  alias Mh.Performance
   use MhWeb, :router
 
   pipeline :browser do
@@ -18,6 +19,14 @@ defmodule MhWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  scope "show", MhWeb do
+    pipe_through :browser
+
+    live "/manager", Live.Performance.Manager
+    live "/screen", Live.Performance.Screen
+    live "/participant", Live.Performance.Participant
   end
 
   # Other scopes may use custom stacks.
