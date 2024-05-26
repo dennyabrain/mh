@@ -1,3 +1,9 @@
 <div class="p-4 bg-slate-50">
-    <h1>Screen</h1>
+  <h1>Screen</h1>
+  <div :if={@payload == nil}>
+    nothing to show
+  </div>
+  <div :if={@payload != nil}>
+    we have a payload
+  </div>
 </div>

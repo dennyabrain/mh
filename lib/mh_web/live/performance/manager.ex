@@ -47,4 +47,10 @@ defmodule MhWeb.Live.Performance.Manager do
   defp error_to_string(:too_large), do: "Too large"
   defp error_to_string(:too_many_files), do: "You have selected too many files"
   defp error_to_string(:not_accepted), do: "You have selected an unacceptable file type"
+
+  def handle_event("send-event-to-screen", unsigned_params, socket) do
+    Performance.update_screen()
+
+    {:noreply, socket}
+  end
 end
