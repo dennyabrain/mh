@@ -30,7 +30,10 @@ defmodule MhWeb.Performance.ChooseImageForScreenComponent do
     ~H"""
     <div>
       <h1>Choose Image</h1>
-      <div :if={@media_files} class="mt-4 bg-slate-200 p-4 flex flex-row gap-8 overflow-scroll">
+      <div
+        :if={@media_files}
+        class="mt-4 bg-slate-200 p-4 flex flex-row flex-wrap gap-8 overflow-scroll"
+      >
         <%= for file <- @media_files do %>
           <div class="flex flex-col gap-2">
             <input
