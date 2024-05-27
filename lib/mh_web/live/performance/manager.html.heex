@@ -76,12 +76,12 @@
     </div>
 
     <div class="bg-purple-300 p-2 w-fit rounded-lg">
-      <button phx-click={show_modal("create_manipulated_image_modal")}>
+      <button phx-click={show_modal("send_poll_modal")}>
         Show Poll on Screen
       </button>
-      <%!-- <.modal id="create_manipulated_image_modal">
-      <.live_component module={ManipulatedImageComponent} id="manipulated_image" />
-    </.modal> --%>
+      <.modal id="send_poll_modal">
+        <.live_component module={ShowPollComponent} id="send_poll_modal" />
+      </.modal>
     </div>
 
     <div class="bg-purple-300 p-2 w-fit rounded-lg">

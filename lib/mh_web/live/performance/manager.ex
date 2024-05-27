@@ -1,6 +1,7 @@
 defmodule MhWeb.Live.Performance.Manager do
   alias MhWeb.Performance.ChooseImageForScreenComponent
   alias MhWeb.Performance.ManipulatedImageComponent
+  alias MhWeb.Performance.ShowPollComponent
   alias Mh.Performance
   use MhWeb, :live_view
   use MhWeb, :html

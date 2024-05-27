@@ -20,12 +20,27 @@ defmodule MhWeb.Live.Performance.Screen do
   end
 
   def handle_info({:poll, payload}, socket) do
+    IO.inspect("received poll #{inspect(payload)}")
+    photo_ids = payload.photos
+    score = Enum.reduce(photo_ids, %{}, fn i, acc -> Map.put(acc, i, 0) end)
+
+    photos = Performance.get_gooey_face_inpaintings(photo_ids)
+
     socket =
       socket
       |> assign(:type, :poll)
-      |> assign(:payload, payload)
+      |> assign(:photos, photos)
+      |> assign(:score, score)
 
     {:noreply, socket}
+  end
+
+  def handle_info({:vote, id}, socket) do
+    IO.inspect("voted for #{id}")
+    current_score = socket.assigns.score
+    current_vote = current_score[id]
+    new_score = Map.put(current_score, id, current_vote + 1) |> IO.inspect()
+    {:noreply, assign(socket, :score, new_score)}
   end
 
   def handle_info({:manipulated_image, payload}, socket) do

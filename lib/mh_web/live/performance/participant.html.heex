@@ -2,13 +2,10 @@
   <h1>Participant</h1>
   <p>click on image to vote</p>
   <div :if={@type == :poll}>
-    <div :if={@payload == nil}>
-      nothing to show
-    </div>
-    <div :if={@payload != nil} class="flex flex-col gap-8">
-      <%= for image <- @payload.images do %>
-        <div class="bg-red-700 h-[40vh] cursor-pointer" phx-click="vote" phx-value-id={1}>
-          <img class="p-2 object-contain h-[35vh] w-96" src={image} />
+    <div :if={@photos != nil} class="flex flex-col gap-8">
+      <%= for photo <- @photos do %>
+        <div class="bg-red-700 h-[40vh] cursor-pointer" phx-click="vote" phx-value-id={photo.id}>
+          <img class="p-2 object-contain h-[35vh] w-96" src={photo.output} />
         </div>
       <% end %>
     </div>

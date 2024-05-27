@@ -11,16 +11,21 @@ defmodule MhWeb.Live.Performance.Participant do
   end
 
   def handle_info({:poll, payload}, socket) do
+    photo_ids = payload.photos
+
+    photos = Performance.get_gooey_face_inpaintings(photo_ids)
+
     socket =
       socket
       |> assign(:type, :poll)
-      |> assign(:payload, payload)
+      |> assign(:photos, photos)
 
     {:noreply, socket}
   end
 
-  def handle_event("vote", unsigned_params, socket) do
-    IO.inspect(unsigned_params)
+  def handle_event("vote", params, socket) do
+    IO.inspect(params)
+    Performance.update_vote(String.to_integer(params["id"]))
 
     {:noreply, socket}
   end

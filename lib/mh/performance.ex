@@ -31,12 +31,24 @@ defmodule Mh.Performance do
     |> Repo.insert()
   end
 
+  def get_gooey_face_inpaintings(images) when is_list(images) do
+    Enum.map(images, &temp(&1))
+  end
+
   def get_gooey_face_inpaintings(image_id) do
     Repo.get(GooeyFaceInpainting, image_id).output
   end
 
+  def temp(image_id) do
+    Repo.get(GooeyFaceInpainting, image_id)
+  end
+
   def update_screen(event) do
     Phoenix.PubSub.broadcast(Mh.PubSub, "screen", event)
+  end
+
+  def update_vote(id) do
+    Phoenix.PubSub.broadcast(Mh.PubSub, "screen", {:vote, id})
   end
 
   def get_manipulated_image(%{email: email, prompt: prompt}),
