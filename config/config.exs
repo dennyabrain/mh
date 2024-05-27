@@ -31,6 +31,10 @@ config :mh, MhWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :mh, Mh.Mailer, adapter: Swoosh.Adapters.Local
 
+config :mh,
+  file_server_base_url:
+    "https://77f8-2401-4900-1c8a-7d46-5243-b774-6c31-bfe7.ngrok-free.app/uploads"
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",

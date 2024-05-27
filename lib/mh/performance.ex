@@ -1,4 +1,6 @@
 defmodule Mh.Performance do
+  alias Mh.Repo
+  alias Mh.Performance.GooeyFaceInpainting
   alias Mh.GooeyApiClient
 
   def files() do
@@ -10,12 +12,30 @@ defmodule Mh.Performance do
     end
   end
 
+  def gooey_files() do
+    Repo.all(GooeyFaceInpainting)
+    |> Enum.map(fn item -> Map.take(item, GooeyFaceInpainting.__schema__(:fields)) end)
+  end
+
   def subscribe() do
     Phoenix.PubSub.subscribe(Mh.PubSub, "screen")
   end
 
-  def update_screen() do
-    event = {:poll, %{images: ["a", "b"]}}
+  def create_gooey_face_inpaintings(params) do
+    %GooeyFaceInpainting{}
+    |> GooeyFaceInpainting.changeset(%{
+      src: params.src,
+      prompt: params.prompt,
+      output: params.output
+    })
+    |> Repo.insert()
+  end
+
+  def get_gooey_face_inpaintings(image_id) do
+    Repo.get(GooeyFaceInpainting, image_id).output
+  end
+
+  def update_screen(event) do
     Phoenix.PubSub.broadcast(Mh.PubSub, "screen", event)
   end
 

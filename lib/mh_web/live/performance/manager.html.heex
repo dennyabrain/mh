@@ -1,5 +1,6 @@
 <div class="p-4 bg-slate-50">
   <h1>Manager</h1>
+
   <div>
     <form id="upload-form" phx-submit="save" phx-change="validate">
       <.live_file_input upload={@uploads.avatar} />
@@ -41,12 +42,64 @@
       <p class="alert alert-danger"><%= error_to_string(err) %></p>
     <% end %>
 
-    <div class="mt-4 bg-slate-200 p-4">
+    <h2 class="mt-8">Uploaded Media</h2>
+    <div class="mt-4 bg-slate-200 p-4 flex flex-row gap-8 overflow-scroll">
       <%= for file <- @media_files do %>
-        <img src={"/uploads/#{file}"} />
+        <img class="h-24 w-24" src={"/uploads/#{file}"} />
       <% end %>
     </div>
 
-    <button phx-click="send-event-to-screen">Send Event to Screen</button>
+    <h2 class="mt-8">Manipulated Media</h2>
+    <div class="mt-4 bg-slate-200 p-4 flex flex-row gap-8 overflow-scroll">
+      <%!-- <%= for file <- @media_files do %>
+        <img class="h-24 w-24" src={"/uploads/#{file}"} />
+      <% end %> --%>
+    </div>
   </section>
+  <div class="flex flex-col gap-4 border rounded-sm p-2 mt-4">
+    <div class="bg-purple-300 p-2 w-fit rounded-lg">
+      <button phx-click={show_modal("create_manipulated_image_modal")}>
+        Create Manipulated Image
+      </button>
+      <.modal id="create_manipulated_image_modal">
+        <.live_component module={ManipulatedImageComponent} id="manipulated_image" />
+      </.modal>
+    </div>
+
+    <div class="bg-purple-300 p-2 w-fit rounded-lg">
+      <button phx-click={show_modal("show_image_on_screen")}>
+        Show Image on Screen
+      </button>
+      <.modal id="show_image_on_screen">
+        <.live_component module={ChooseImageForScreenComponent} id="show_image_on_screen" />
+      </.modal>
+    </div>
+
+    <div class="bg-purple-300 p-2 w-fit rounded-lg">
+      <button phx-click={show_modal("create_manipulated_image_modal")}>
+        Show Poll on Screen
+      </button>
+      <%!-- <.modal id="create_manipulated_image_modal">
+      <.live_component module={ManipulatedImageComponent} id="manipulated_image" />
+    </.modal> --%>
+    </div>
+
+    <div class="bg-purple-300 p-2 w-fit rounded-lg">
+      <button phx-click={show_modal("create_manipulated_image_modal")}>
+        Add Words to Taboo
+      </button>
+      <%!-- <.modal id="create_manipulated_image_modal">
+      <.live_component module={ManipulatedImageComponent} id="manipulated_image" />
+    </.modal> --%>
+    </div>
+
+    <div class="bg-purple-300 p-2 w-fit rounded-lg">
+      <button phx-click={show_modal("create_manipulated_image_modal")}>
+        Show Taboo on Screen
+      </button>
+      <%!-- <.modal id="create_manipulated_image_modal">
+      <.live_component module={ManipulatedImageComponent} id="manipulated_image" />
+    </.modal> --%>
+    </div>
+  </div>
 </div>
