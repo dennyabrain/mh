@@ -18,3 +18,5 @@ config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
+config :mh,
+  file_server_base_url: "https://mining-hate.fly.dev/uploads"

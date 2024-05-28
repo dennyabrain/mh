@@ -14,6 +14,7 @@ defmodule Mh.Application do
       {Phoenix.PubSub, name: Mh.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Mh.Finch},
+      Mh.Performance.ScreenState,
       # Start a worker by calling: Mh.Worker.start_link(arg)
       # {Mh.Worker, arg},
       # Start to serve requests, typically the last entry

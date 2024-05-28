@@ -1,4 +1,5 @@
 defmodule Mh.Performance do
+  alias Mh.Performance.ScreenState
   alias Mh.Repo
   alias Mh.Performance.GooeyFaceInpainting
   alias Mh.GooeyApiClient
@@ -44,10 +45,12 @@ defmodule Mh.Performance do
   end
 
   def update_screen(event) do
+    ScreenState.update_state(event)
     Phoenix.PubSub.broadcast(Mh.PubSub, "screen", event)
   end
 
   def update_vote(id) do
+    ScreenState.update_state({:vote, id})
     Phoenix.PubSub.broadcast(Mh.PubSub, "screen", {:vote, id})
   end
 

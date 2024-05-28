@@ -1,11 +1,31 @@
 defmodule MhWeb.Live.Performance.Participant do
+  alias Mh.Performance.ScreenState
   alias Mh.Performance
   use MhWeb, :live_view
   use MhWeb, :html
 
   def mount(params, session, socket) do
     if connected?(socket), do: Performance.subscribe()
-    socket = socket |> assign(:type, nil) |> assign(:payload, nil)
+
+    socket =
+      case ScreenState.get_state() do
+        %{} ->
+          socket |> assign(:type, nil) |> assign(:payload, nil)
+
+        {:poll, payload} ->
+          # score = Enum.reduce(payload.photos, %{}, fn i, acc -> Map.put(acc, i, 0) end)
+
+          socket
+          |> assign(:type, :poll)
+          |> assign(:photos, payload.photos)
+
+        # |> assign(:score, score)
+
+        {type, payload} ->
+          socket |> assign(:type, type) |> assign(:payload, payload)
+      end
+
+    # socket = socket |> assign(:type, nil) |> assign(:payload, nil)
 
     {:ok, socket}
   end

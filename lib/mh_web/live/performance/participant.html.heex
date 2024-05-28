@@ -3,7 +3,7 @@
   <p>click on image to vote</p>
   <div :if={@type == :poll}>
     <div :if={@photos != nil} class="flex flex-col gap-8">
-      <%= for photo <- @photos do %>
+      <%= for photo <-  Performance.get_gooey_face_inpaintings(@photos) do %>
         <div class="bg-red-700 h-[40vh] cursor-pointer" phx-click="vote" phx-value-id={photo.id}>
           <img class="p-2 object-contain h-[35vh] w-96" src={photo.output} />
         </div>
