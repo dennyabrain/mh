@@ -5,7 +5,8 @@ defmodule Mh.Performance do
   alias Mh.GooeyApiClient
 
   def files() do
-    uploads_dir = Path.join([:code.priv_dir(:mh), "static", "uploads"])
+    # uploads_dir = Path.join([:code.priv_dir(:mh), "static", "uploads"])
+    uploads_dir = Path.join(["/uploads"])
 
     case File.ls(uploads_dir) do
       {:ok, files} -> files
