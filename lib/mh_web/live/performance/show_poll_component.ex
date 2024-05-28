@@ -23,7 +23,7 @@ defmodule MhWeb.Performance.ShowPollComponent do
   end
 
   def handle_event("send_to_screen", _params, socket) do
-    photos = socket.assigns.photos |> IO.inspect()
+    photos = socket.assigns.photos
     # event = {:manipulated_image, %{image_id: photo_id}}
     event =
       {:poll, %{photos: photos}}

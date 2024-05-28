@@ -42,7 +42,7 @@ defmodule MhWeb.Live.Performance.Participant do
   def handle_info({:poll, payload}, socket) do
     photo_ids = payload.photos
 
-    photos = Performance.get_gooey_face_inpaintings(photo_ids)
+    photos = photo_ids
 
     socket =
       socket
