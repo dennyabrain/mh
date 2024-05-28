@@ -29,6 +29,12 @@ defmodule MhWeb.Live.Performance.Screen do
           |> assign(:photos, payload.photos)
           |> assign(:score, score)
 
+        {:manipulated_image, payload} ->
+          socket
+          |> assign(:type, :manipulated_image)
+          |> assign(:comments, [])
+          |> assign(:payload, payload)
+
         {type, payload} ->
           socket |> assign(:type, type) |> assign(:payload, payload)
       end
@@ -58,6 +64,12 @@ defmodule MhWeb.Live.Performance.Screen do
     current_vote = current_score[id]
     new_score = Map.put(current_score, id, current_vote + 1) |> IO.inspect()
     {:noreply, assign(socket, :score, new_score)}
+  end
+
+  def handle_info({:comment, comment}, socket) do
+    current_comments = socket.assigns.comments
+    new_comments = [comment] ++ current_comments
+    {:noreply, assign(socket, :score, new_comments)}
   end
 
   def handle_info({:manipulated_image, payload}, socket) do

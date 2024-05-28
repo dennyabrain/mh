@@ -83,4 +83,4 @@ config :swoosh, :api_client, false
 
 config :mh,
   file_server_base_url:
-    "https://77f8-2401-4900-1c8a-7d46-5243-b774-6c31-bfe7.ngrok-free.app/uploads"
+    "https://81e7-2401-4900-1c8a-7d46-8258-bf5b-732e-1ca.ngrok-free.app/uploads"

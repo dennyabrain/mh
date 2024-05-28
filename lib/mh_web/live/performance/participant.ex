@@ -19,6 +19,15 @@ defmodule MhWeb.Live.Performance.Participant do
           |> assign(:type, :poll)
           |> assign(:photos, payload.photos)
 
+        {:manipulated_image, payload} ->
+          form_fields = %{"comment" => ""}
+
+          socket
+          |> assign(:type, :manipulated_image)
+          |> assign(:comments, [])
+          |> assign(:payload, payload)
+          |> assign(:form, to_form(form_fields))
+
         # |> assign(:score, score)
 
         {type, payload} ->
@@ -46,6 +55,16 @@ defmodule MhWeb.Live.Performance.Participant do
   def handle_event("vote", params, socket) do
     IO.inspect(params)
     Performance.update_vote(String.to_integer(params["id"]))
+
+    {:noreply, socket}
+  end
+
+  def handle_event("send_comment", params, socket) do
+    IO.inspect(params)
+    form_fields = %{"comment" => ""}
+
+    socket =
+      socket |> push_navigate(to: ~p"/show/participant")
 
     {:noreply, socket}
   end
