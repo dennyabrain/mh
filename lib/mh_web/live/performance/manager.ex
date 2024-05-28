@@ -36,7 +36,8 @@ defmodule MhWeb.Live.Performance.Manager do
   def handle_event("save", _params, socket) do
     uploaded_files =
       consume_uploaded_entries(socket, :avatar, fn %{path: path}, _entry ->
-        dest = Path.join([:code.priv_dir(:mh), "static", "uploads", Path.basename(path)])
+        # dest = Path.join([:code.priv_dir(:mh), "static", "uploads", Path.basename(path)])
+        dest = Path.join(["/uploads", Path.basename(path)])
         # You will need to create `priv/static/uploads` for `File.cp!/2` to work.
         File.cp!(path, dest)
         {:ok, ~p"/uploads/#{Path.basename(dest)}"}

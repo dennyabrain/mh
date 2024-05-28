@@ -23,6 +23,8 @@ defmodule MhWeb.Endpoint do
     gzip: false,
     only: MhWeb.static_paths()
 
+  plug Plug.Static, from: "/uploads"
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
