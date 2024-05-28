@@ -17,20 +17,22 @@
     <div :if={@payload == nil}>
       no image to show
     </div>
-    <div :if={@payload != nil} class="flex flex-col gap-8">
-      <div>
-        <img
-          class="object-contain h-[30vh]"
-          src={Performance.get_gooey_face_inpaintings(@payload.image_id)}
-        />
+    <div class="flex flex-row gap-4">
+      <div :if={@payload != nil} class="flex flex-col gap-8 w-2/3">
+        <div>
+          <img
+            class="object-contain w-fit h-[45vh]"
+            src={Performance.get_gooey_face_inpaintings(@payload.image_id)}
+          />
+        </div>
       </div>
-    </div>
-    <div :if={@comments != nil}>
-      <%= for comment <- @comments do %>
-        <p class="mt-2 py-2 px-4 bg-green-300 rounded-lg mb-2 fit-content  w-fit">
-          <%= comment %>
-        </p>
-      <% end %>
+      <div :if={@comments != nil}>
+        <%= for comment <- @comments do %>
+          <p class={["mt-2 py-2 px-4  rounded-lg mb-2 fit-content  w-fit", "bg-green-300"]}>
+            <%= comment %>
+          </p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

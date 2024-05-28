@@ -88,4 +88,22 @@ defmodule MhWeb.Live.Performance.Screen do
 
     {:noreply, socket}
   end
+
+  def get_random_color() do
+    Enum.shuffle([
+      "red",
+      "orange",
+      "amber",
+      "yellow",
+      "lime",
+      "green",
+      "emerald",
+      "teal",
+      "indigo",
+      "fuchsia",
+      "pink",
+      "rose"
+    ])
+    |> hd
+  end
 end
