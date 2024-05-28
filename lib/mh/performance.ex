@@ -54,6 +54,10 @@ defmodule Mh.Performance do
     Phoenix.PubSub.broadcast(Mh.PubSub, "screen", {:vote, id})
   end
 
+  def send_comment(comment) do
+    Phoenix.PubSub.broadcast(Mh.PubSub, "screen", {:comment, comment})
+  end
+
   def get_manipulated_image(%{email: email, prompt: prompt}),
     do: GooeyApiClient.email_inpainting(email, prompt)
 

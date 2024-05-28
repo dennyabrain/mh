@@ -52,15 +52,34 @@ defmodule MhWeb.Live.Performance.Participant do
     {:noreply, socket}
   end
 
+  def handle_info({:manipulated_image, payload}, socket) do
+    form_fields = %{"comment" => ""}
+
+    socket =
+      socket
+      |> assign(:type, :manipulated_image)
+      |> assign(:comments, [])
+      |> assign(:payload, payload)
+      |> assign(:form, to_form(form_fields))
+
+    {:noreply, socket}
+  end
+
+  def handle_info({:vote, payload}, socket) do
+    {:noreply, socket}
+  end
+
   def handle_event("vote", params, socket) do
     IO.inspect(params)
     Performance.update_vote(String.to_integer(params["id"]))
+    socket = socket |> assign(:type, nil) |> assign(:payload, nil)
 
     {:noreply, socket}
   end
 
   def handle_event("send_comment", params, socket) do
     IO.inspect(params)
+    Performance.send_comment(params["comment"])
     form_fields = %{"comment" => ""}
 
     socket =

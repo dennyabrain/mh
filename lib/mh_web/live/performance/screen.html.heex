@@ -1,14 +1,13 @@
-<div class="p-4 bg-slate-50">
-  <h1>Screen</h1>
+<div class="p-4 ">
   <div :if={@type == :poll}>
     <div :if={@photos == nil}>
       nothing to show
     </div>
     <div :if={@photos != nil} class="flex flex-col gap-8">
       <%= for photo <- Performance.get_gooey_face_inpaintings(@photos)   do %>
-        <div class="h-[40vh]">
+        <div class="h-[40vh] flex flex-row gap-8 items-center">
           <img class="p-2 object-contain h-[35vh] w-96" src={photo.output} />
-          <p class="text-lg"><%= @score[photo.id] %></p>
+          <p class="text-8xl "><%= @score[photo.id] %></p>
         </div>
       <% end %>
     </div>
@@ -19,12 +18,19 @@
       no image to show
     </div>
     <div :if={@payload != nil} class="flex flex-col gap-8">
-      <div class="h-[40vh]">
+      <div>
         <img
-          class="p-2 object-contain h-[35vh] w-96"
+          class="object-contain h-[30vh]"
           src={Performance.get_gooey_face_inpaintings(@payload.image_id)}
         />
       </div>
+    </div>
+    <div :if={@comments != nil}>
+      <%= for comment <- @comments do %>
+        <p class="mt-2 py-2 px-4 bg-green-300 rounded-lg mb-2 fit-content  w-fit">
+          <%= comment %>
+        </p>
+      <% end %>
     </div>
   </div>
 </div>

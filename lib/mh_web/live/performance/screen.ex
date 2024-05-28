@@ -69,7 +69,7 @@ defmodule MhWeb.Live.Performance.Screen do
   def handle_info({:comment, comment}, socket) do
     current_comments = socket.assigns.comments
     new_comments = [comment] ++ current_comments
-    {:noreply, assign(socket, :score, new_comments)}
+    {:noreply, assign(socket, :comments, new_comments)}
   end
 
   def handle_info({:manipulated_image, payload}, socket) do
