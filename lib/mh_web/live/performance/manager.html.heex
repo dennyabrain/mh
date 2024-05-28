@@ -49,12 +49,12 @@
       <% end %>
     </div>
 
-    <h2 class="mt-8">Manipulated Media</h2>
+    <%!-- <h2 class="mt-8">Manipulated Media</h2>
     <div class="mt-4 bg-slate-200 p-4 flex flex-row gap-8 overflow-scroll">
-      <%!-- <%= for file <- @media_files do %>
+       <%= for file <- @media_files do %>
         <img class="h-24 w-24" src={"/uploads/#{file}"} />
-      <% end %> --%>
-    </div>
+      <% end %> 
+    </div> --%>
   </section>
   <div class="flex flex-col gap-4 border rounded-sm p-2 mt-4">
     <div class="bg-purple-300 p-2 w-fit rounded-lg">
@@ -84,22 +84,23 @@
       </.modal>
     </div>
 
-    <div class="bg-purple-300 p-2 w-fit rounded-lg">
+    <%!-- <div class="bg-purple-300 p-2 w-fit rounded-lg">
       <button phx-click={show_modal("create_manipulated_image_modal")}>
         Add Words to Taboo
       </button>
-      <%!-- <.modal id="create_manipulated_image_modal">
+      <.modal id="create_manipulated_image_modal">
       <.live_component module={ManipulatedImageComponent} id="manipulated_image" />
-    </.modal> --%>
-    </div>
+    </.modal> 
+    </div> --%>
 
-    <div class="bg-purple-300 p-2 w-fit rounded-lg">
+    <%!-- <div class="bg-purple-300 p-2 w-fit rounded-lg">
       <button phx-click={show_modal("create_manipulated_image_modal")}>
         Show Taboo on Screen
       </button>
-      <%!-- <.modal id="create_manipulated_image_modal">
+      <.modal id="create_manipulated_image_modal">
       <.live_component module={ManipulatedImageComponent} id="manipulated_image" />
-    </.modal> --%>
-    </div>
+    </.modal> 
+    </div> --%>
+    <div class="bg-red-600 p-4 mt-20"><button phx-click="reset">Reset Things</button></div>
   </div>
 </div>

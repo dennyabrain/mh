@@ -70,4 +70,10 @@ defmodule MhWeb.Live.Performance.Screen do
 
     {:noreply, socket}
   end
+
+  def handle_info(%{}, socket) do
+    socket = socket |> assign(:type, nil) |> assign(:payload, nil)
+
+    {:noreply, socket}
+  end
 end

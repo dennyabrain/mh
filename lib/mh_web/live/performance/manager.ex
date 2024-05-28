@@ -56,4 +56,10 @@ defmodule MhWeb.Live.Performance.Manager do
 
     {:noreply, socket}
   end
+
+  def handle_event("reset", unsigned_params, socket) do
+    Performance.update_screen(%{})
+
+    {:noreply, socket}
+  end
 end
